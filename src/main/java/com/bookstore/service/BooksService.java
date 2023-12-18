@@ -1,6 +1,7 @@
 package com.bookstore.service;
 
 import com.bookstore.domain.Book;
+import com.bookstore.domain.Category;
 import com.bookstore.exception.ObjectNotFoundException;
 import com.bookstore.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,14 @@ public class BooksService {
 
     private void updateData(Book newBook, Book book) {
         newBook.setTitle(book.getTitle());
-        newBook.setName(book.getName());
+        newBook.setName_author(book.getName_author());
         newBook.setText(book.getText());
+    }
+
+    public Book create(Integer idCategory, Book book) {
+        book.setId(null);
+        Category cat = categoryService.searchById(idCategory);
+        book.setCategory(cat);
+        return bookRepository.save(book);
     }
 }
