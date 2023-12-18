@@ -23,9 +23,9 @@ public class DBService {
         Category category1 = new Category(null, "Computing", "Books");
         Category category2 = new Category(null, "Computing", "Books face");
 
-        Book book = new Book(null, "Clean code", "Teixeira", category);
-        Book book1 = new Book(null, "Book Java", "Java Records", category);
-        Book book2 = new Book(null, "Clean Angular", "Angular Records", category);
+        Book book = new Book(null, "Clean code", "Teixeira", "Java", category);
+        Book book1 = new Book(null, "Book Java", "Java Records", "Java", category);
+        Book book2 = new Book(null, "Clean Angular", "Angular Records", "Angular", category);
 
         category.getBooks().add(book);
         category1.getBooks().addAll(List.of(book1, book2));

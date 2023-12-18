@@ -3,6 +3,7 @@ package com.bookstore.controller;
 import com.bookstore.domain.Book;
 import com.bookstore.dtos.BookDTO;
 import com.bookstore.service.BooksService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/books")
 public class BooksController {
 
@@ -33,14 +35,14 @@ public class BooksController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable("id")Integer id, @RequestBody Book book){
+    public ResponseEntity<Book> updateBook(@PathVariable("id")Integer id, @Valid @RequestBody Book book){
        Book upBook =  booksService.updateBook(id, book);
        return ResponseEntity.ok().body(upBook);
 
     }
 
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<Book> updateBookPath(@PathVariable("id")Integer id, @RequestBody Book book){
+    public ResponseEntity<Book> updateBookPath(@PathVariable("id")Integer id, @Valid @RequestBody Book book){
         Book upBook =  booksService.updateBook(id, book);
         return ResponseEntity.ok().body(upBook);
 
@@ -48,7 +50,7 @@ public class BooksController {
 
     @PostMapping
     public ResponseEntity<Book> create(@RequestParam(value = "category", defaultValue = "0")
-                                           Integer id_category, @RequestBody Book book){
+                                           Integer id_category, @Valid @RequestBody Book book){
 
         Book createBook = booksService.create(id_category, book);
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/books/{id}")
