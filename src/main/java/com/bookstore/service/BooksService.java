@@ -1,13 +1,10 @@
 package com.bookstore.service;
 
 import com.bookstore.domain.Book;
-import com.bookstore.dtos.BookDTO;
 import com.bookstore.exception.ObjectNotFoundException;
 import com.bookstore.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +23,8 @@ public class BooksService {
                 + Book.class.getName()));
     }
 
-    public List<Book> findAllBooks(Integer idCat) {
-        categoryService.searchById(idCat);
-        return bookRepository.findAllByCategory(idCat);
+    public List<Book> findAllBooks(Integer id_category) {
+        categoryService.searchById(id_category);
+        return bookRepository.findAllByCategory(id_category);
     }
 }
