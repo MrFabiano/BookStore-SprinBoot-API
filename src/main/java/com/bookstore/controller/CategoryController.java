@@ -5,6 +5,7 @@ import com.bookstore.domain.Category;
 import com.bookstore.dtos.CategoryDTO;
 import com.bookstore.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -44,5 +45,11 @@ public class CategoryController {
                 .buildAndExpand(obj.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO> update(@PathVariable("id") Integer id, @RequestBody CategoryDTO dto){
+        Category category = categoryService.update(id, dto);
+        return ResponseEntity.ok().body(new CategoryDTO(category));
     }
 }
