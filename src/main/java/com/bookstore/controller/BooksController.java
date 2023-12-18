@@ -3,6 +3,7 @@ package com.bookstore.controller;
 import com.bookstore.domain.Book;
 import com.bookstore.dtos.BookDTO;
 import com.bookstore.service.BooksService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +29,19 @@ public class BooksController {
         List<Book> list = booksService.findAllBooks(id_category);
         List<BookDTO> dtoList = list.stream().map(obj -> new BookDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(dtoList);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable("id")Integer id, @RequestBody Book book){
+       Book upBook =  booksService.updateBook(id, book);
+       return ResponseEntity.ok().body(upBook);
+
+    }
+
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Book> updateBookPath(@PathVariable("id")Integer id, @RequestBody Book book){
+        Book upBook =  booksService.updateBook(id, book);
+        return ResponseEntity.ok().body(upBook);
+
     }
 }

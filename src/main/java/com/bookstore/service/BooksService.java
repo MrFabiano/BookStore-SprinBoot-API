@@ -27,4 +27,16 @@ public class BooksService {
         categoryService.searchById(id_category);
         return bookRepository.findAllByCategory(id_category);
     }
+
+    public Book updateBook(Integer id, Book book) {
+        Book newBook = findById(id);
+        updateData(newBook, book);
+        return bookRepository.save(newBook);
+    }
+
+    private void updateData(Book newBook, Book book) {
+        newBook.setTitle(book.getTitle());
+        newBook.setName(book.getName());
+        newBook.setText(book.getText());
+    }
 }

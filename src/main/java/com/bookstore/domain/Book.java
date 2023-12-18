@@ -18,6 +18,7 @@ public class Book {
     private Integer id;
     private String title;
     private String text;
+    private String name;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id")
