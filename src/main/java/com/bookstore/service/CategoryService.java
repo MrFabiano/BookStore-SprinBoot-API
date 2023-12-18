@@ -1,5 +1,6 @@
 package com.bookstore.service;
 
+import com.bookstore.domain.Book;
 import com.bookstore.domain.Category;
 import com.bookstore.dtos.CategoryDTO;
 import com.bookstore.exception.DataIntegrationViolationException;
@@ -48,4 +49,5 @@ public class CategoryService {
             throw new DataIntegrationViolationException("Object cannot be deleted, as it has associated books");
         }
     }
+
 }
