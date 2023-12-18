@@ -2,9 +2,11 @@ package com.bookstore.service;
 
 import com.bookstore.domain.Category;
 import com.bookstore.dtos.CategoryDTO;
+import com.bookstore.exception.DataIntegrationViolationException;
 import com.bookstore.exception.ObjectNotFoundException;
 import com.bookstore.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,4 +40,12 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    public void delete(Integer id) {
+        searchById(id);
+        try {
+            categoryRepository.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrationViolationException("Object cannot be deleted, as it has associated books");
+        }
+    }
 }

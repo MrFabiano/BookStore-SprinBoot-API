@@ -16,4 +16,12 @@ public class ResourceExceptionHandler {
                 e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
     }
+
+    @ExceptionHandler(DataIntegrationViolationException.class)
+    public ResponseEntity<StandardError> dataIntegrationBooksAssociated(DataIntegrationViolationException e, ServletRequest request){
+        StandardError standardError = new StandardError(System.currentTimeMillis(),
+                HttpStatus.BAD_REQUEST.value(),
+                e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(standardError);
+    }
 }
