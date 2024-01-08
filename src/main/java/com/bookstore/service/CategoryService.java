@@ -1,6 +1,5 @@
 package com.bookstore.service;
 
-import com.bookstore.domain.Book;
 import com.bookstore.domain.Category;
 import com.bookstore.dtos.CategoryDTO;
 import com.bookstore.exception.DataIntegrationViolationException;

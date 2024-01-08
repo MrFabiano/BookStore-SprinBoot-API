@@ -28,7 +28,7 @@ public class BooksController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BookDTO>> findAllBooks(@RequestParam(value = "category", defaultValue = "0") Integer id_category){
+    public ResponseEntity<List<BookDTO>> findAllBooks(@RequestParam(value = "category", defaultValue = "1") Integer id_category){
         List<Book> list = booksService.findAllBooks(id_category);
         List<BookDTO> dtoList = list.stream().map(obj -> new BookDTO(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(dtoList);
